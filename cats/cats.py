@@ -30,7 +30,11 @@ def pick(paragraphs, select, k):
     ''
     """
     # BEGIN PROBLEM 1
-    "*** YOUR CODE HERE ***"
+    valid_paragraphs = [s for s in paragraphs if select(s)]
+    if k >= len(valid_paragraphs):
+        return ''
+    else:
+        return valid_paragraphs[k]
     # END PROBLEM 1
 
 
@@ -46,17 +50,28 @@ def about(subject):
     'Cute Dog!'
     >>> pick(['Cute Dog!', 'That is a cat.', 'Nice pup.'], about_dogs, 1)
     'Nice pup.'
-    """
+    """    
     assert all([lower(x) == x for x in subject]), 'subjects should be lowercase.'
     # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
+    def check(paragraph):
+        plain_words = [remove_punctuation(x) for x in split(lower(paragraph))]
+        # print(plain_words)
+        for paragraph_word in plain_words:
+            # print(paragraph_word)
+            for subject_word in subject:
+                if paragraph_word == subject_word:
+                    return True
+        return False
+    return check
     # END PROBLEM 2
+
+# dogs = about(['dogs', 'hounds'])
+# print(dogs('A paragraph about dogs.'))
 
 
 def accuracy(typed, source):
     """Return the accuracy (percentage of words typed correctly) of TYPED
     when compared to the prefix of SOURCE that was typed.
-
     Arguments:
         typed: a string that may contain typos
         source: a string without errors
@@ -79,7 +94,18 @@ def accuracy(typed, source):
     typed_words = split(typed)
     source_words = split(source)
     # BEGIN PROBLEM 3
-    "*** YOUR CODE HERE ***"
+    source_len = len(source_words)
+    typed_len = len(typed_words)
+    if typed_len == 0:
+        if source_len == 0:
+            return 100.0
+        else:
+            return 0.0
+    count_matched = 0
+    for i in range(min(source_len, typed_len)):
+        if typed_words[i] == source_words[i]:
+            count_matched += 1
+    return count_matched / typed_len * 100.0
     # END PROBLEM 3
 
 
@@ -97,7 +123,7 @@ def wpm(typed, elapsed):
     """
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
+    return len(typed) / elapsed * 12.0
     # END PROBLEM 4
 
 

@@ -41,7 +41,7 @@ def my_reduce(combiner, seq):
     >>> my_reduce(lambda x, y: x * y, [1, 2, 3, 4])  # 1 * 2 * 3 * 4
     24
     >>> my_reduce(lambda x, y: x * y, [4])
-    4
+   cd  4
     >>> my_reduce(lambda x, y: x + 2 * y, [1, 2, 3]) # (1 + 2 * 2) + 2 * 3
     11
     """

@@ -205,4 +205,3 @@ def make_anonymous_factorial():
     True
     """
     return (lambda g: lambda x: g(g,x))(lambda f, n: 1 if n == 1 else n * f(f, n - 1))
-

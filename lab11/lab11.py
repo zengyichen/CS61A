@@ -113,12 +113,16 @@ def eval_define(expressions):
                 return unfold(exp.first)
             else:
                 return Pair(unfold(exp.first), unfold(exp.rest))
+        else:
+            return calc_eval(exp)
+        """
         elif exp in bindings:
             return bindings[exp]()
         elif exp in OPERATORS:
             return OPERATORS[exp]
         else:
             return exp
+        """
     bindings[symbol] = unfold
     return symbol
 
